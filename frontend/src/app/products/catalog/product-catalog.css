@@ -1,0 +1,141 @@
+:host {
+  display: block;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.toolbar h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.filters .search {
+  flex: 1 1 260px;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  padding: 6px 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.btn {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: #1a73e8;
+  border-color: #1a73e8;
+  color: #fff;
+}
+
+.banner {
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.banner-warn {
+  background: #fff3cd;
+  border: 1px solid #e6c980;
+}
+
+.state {
+  padding: 32px;
+  text-align: center;
+  color: #555;
+}
+
+.state-error {
+  color: #b00020;
+}
+
+.state-empty .hint,
+.hint {
+  color: #888;
+  font-size: 13px;
+}
+
+table.grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.grid th,
+table.grid td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+table.grid .num {
+  text-align: right;
+}
+
+table.grid th .sort {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-weight: 600;
+  font: inherit;
+}
+
+tr.archived td {
+  color: #999;
+}
+
+.badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.badge-active {
+  background: #e6f4ea;
+  color: #1e7e34;
+}
+
+.badge-archived {
+  background: #f1f3f4;
+  color: #666;
+}
+
+.actions {
+  white-space: nowrap;
+}
+
+.actions a {
+  margin-right: 10px;
+}
+
+.actions button {
+  padding: 2px 8px;
+}
+
+.pager {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+}

@@ -1,0 +1,157 @@
+:host {
+  display: block;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 16px 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.summary div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.summary span {
+  color: #777;
+  font-size: 12px;
+}
+
+.summary .full {
+  grid-column: 1 / -1;
+}
+
+.summary .btn {
+  align-self: end;
+}
+
+.price {
+  color: #1a73e8;
+}
+
+.price-change {
+  margin: 18px 0;
+}
+
+.price-change form {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.price-change input {
+  font: inherit;
+  padding: 6px 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  min-width: 220px;
+}
+
+.field-errors {
+  width: 100%;
+  color: #b00020;
+  font-size: 13px;
+}
+
+.banner {
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.banner-ok {
+  background: #e6f4ea;
+  border: 1px solid #b7dfc0;
+  color: #1e7e34;
+}
+
+.banner-error {
+  background: #fdecea;
+  border: 1px solid #f5c6cb;
+  color: #b00020;
+}
+
+table.grid {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.grid th,
+table.grid td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+table.grid .num {
+  text-align: right;
+}
+
+.up {
+  color: #1e7e34;
+}
+
+.down {
+  color: #b00020;
+}
+
+.state {
+  padding: 24px;
+  text-align: center;
+  color: #555;
+}
+
+.state-error {
+  color: #b00020;
+}
+
+.state-empty {
+  color: #888;
+}
+
+.actions-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+.btn-primary {
+  background: #1a73e8;
+  border-color: #1a73e8;
+  color: #fff;
+}
+
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: default;
+}

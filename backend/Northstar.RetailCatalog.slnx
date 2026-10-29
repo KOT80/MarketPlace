@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Northstar.RetailCatalog.Api/Northstar.RetailCatalog.Api.csproj" />
+    <Project Path="src/Northstar.RetailCatalog.Application/Northstar.RetailCatalog.Application.csproj" />
+    <Project Path="src/Northstar.RetailCatalog.Domain/Northstar.RetailCatalog.Domain.csproj" />
+    <Project Path="src/Northstar.RetailCatalog.Infrastructure/Northstar.RetailCatalog.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Northstar.RetailCatalog.IntegrationTests/Northstar.RetailCatalog.IntegrationTests.csproj" />
+    <Project Path="tests/Northstar.RetailCatalog.UnitTests/Northstar.RetailCatalog.UnitTests.csproj" />
+  </Folder>
+</Solution>

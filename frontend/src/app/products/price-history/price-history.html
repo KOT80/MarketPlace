@@ -1,0 +1,91 @@
+@if (viewState() === 'loading') {
+  <div class="state">Загрузка…</div>
+} @else if (viewState() === 'error') {
+  <div class="state state-error">
+    <strong>{{ appError()?.title }}</strong>
+    <p>{{ appError()?.detail }}</p>
+    <div class="actions-row">
+      <button type="button" class="btn" (click)="reload()">Повторить</button>
+      <a routerLink="/products" class="btn">К каталогу</a>
+    </div>
+  </div>
+} @else if (product(); as item) {
+  <div class="head">
+    <h1>{{ item.name }}</h1>
+    <a routerLink="/products" class="btn">← Каталог</a>
+  </div>
+
+  <div class="summary">
+    <div><span>Артикул</span><strong>{{ item.sku }}</strong></div>
+    <div><span>Категория</span><strong>{{ item.categoryName }}</strong></div>
+    <div><span>Цена</span><strong class="price">{{ item.price | number: '1.2-2':'en' }}</strong></div>
+    <div>
+      <span>Состояние</span>
+      <strong>{{ item.isActive ? 'активен' : 'архив' }}</strong>
+    </div>
+    @if (item.description) {
+      <div class="full"><span>Описание</span><strong>{{ item.description }}</strong></div>
+    }
+    <a [routerLink]="['/products', item.id, 'edit']" class="btn">Редактировать товар</a>
+  </div>
+
+  <section class="price-change">
+    <h2>Изменить цену</h2>
+
+    @if (changedMessage(); as message) {
+      <div class="banner banner-ok">{{ message }}</div>
+    }
+    @if (priceError(); as error) {
+      <div class="banner banner-error">
+        <strong>{{ error.title }}</strong>
+        @if (error.status === 409) {
+          <p>Товар изменён параллельным запросом — данные перезагружены, повторите попытку с актуальной ценой.</p>
+        } @else {
+          <p>{{ error.detail }}</p>
+        }
+      </div>
+    }
+
+    <form [formGroup]="priceForm" (ngSubmit)="onChangePrice()">
+      <input formControlName="price" placeholder="Новая цена, напр. 1234.56" aria-label="Новая цена" />
+      @if (priceForm.controls.price.touched && priceForm.controls.price.invalid) {
+        <div class="field-errors">
+          <span>Число ≥ 0, не более двух знаков после запятой.</span>
+        </div>
+      }
+      <button type="submit" class="btn btn-primary" [disabled]="submitting()">
+        {{ submitting() ? 'Сохранение…' : 'Применить' }}
+      </button>
+    </form>
+  </section>
+
+  <section>
+    <h2>История цен</h2>
+    @if (history().length === 0) {
+      <div class="state state-empty">Изменений цены ещё не было.</div>
+    } @else {
+      <table class="grid">
+        <thead>
+          <tr>
+            <th>Когда (UTC)</th>
+            <th class="num">Старая цена</th>
+            <th class="num">Новая цена</th>
+            <th class="num">Δ</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (entry of history(); track entry.id) {
+            <tr>
+              <td>{{ entry.changedAtUtc | date: 'dd.MM.yyyy HH:mm:ss' }}</td>
+              <td class="num">{{ entry.oldPrice | number: '1.2-2':'en' }}</td>
+              <td class="num">{{ entry.newPrice | number: '1.2-2':'en' }}</td>
+              <td class="num" [class.up]="entry.newPrice > entry.oldPrice" [class.down]="entry.newPrice < entry.oldPrice">
+                {{ (entry.newPrice - entry.oldPrice) | number: '1.2-2':'en' }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+}

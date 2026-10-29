@@ -1,0 +1,122 @@
+@if (loading()) {
+  <div class="state">Загрузка…</div>
+} @else if (loadError(); as error) {
+  <div class="state state-error">
+    <strong>{{ error.title }}</strong>
+    <p>{{ error.detail }}</p>
+    <a routerLink="/products" class="btn">К каталогу</a>
+  </div>
+} @else {
+  <h1>{{ editMode() ? 'Редактирование товара' : 'Новый товар' }}</h1>
+
+  @if (submitError(); as error) {
+    <div class="banner banner-error">
+      <strong>{{ error.title }}</strong>
+      @if (!error.isNetwork && error.detail) {
+        <p>{{ error.detail }}</p>
+      }
+      @if (error.isNetwork) {
+        <p>Сервер недоступен — проверьте, что API запущен.</p>
+      }
+    </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label for="sku">Артикул *</label>
+      <input id="sku" formControlName="sku" maxlength="64" />
+      @if (form.controls.sku.touched && form.controls.sku.invalid) {
+        <div class="field-errors">
+          @if (form.controls.sku.errors?.['required'] || form.controls.sku.errors?.['normalizedSkuRequired']) {
+            <span>Артикул обязателен.</span>
+          }
+          @if (form.controls.sku.errors?.['maxlength']) {
+            <span>Не длиннее 64 символов.</span>
+          }
+          @for (message of fieldErrorMessages('sku'); track message) {
+            <span class="server">{{ message }}</span>
+          }
+        </div>
+      }
+      <div class="hint">Хранится в верхнем регистре; уникален.</div>
+    </div>
+
+    <div class="field">
+      <label for="name">Название *</label>
+      <input id="name" formControlName="name" maxlength="200" />
+      @if (form.controls.name.touched && form.controls.name.invalid) {
+        <div class="field-errors">
+          @if (form.controls.name.errors?.['required']) {
+            <span>Название обязательно.</span>
+          }
+          @if (form.controls.name.errors?.['maxlength']) {
+            <span>Не длиннее 200 символов.</span>
+          }
+          @for (message of fieldErrorMessages('name'); track message) {
+            <span class="server">{{ message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="field">
+      <label for="description">Описание</label>
+      <textarea id="description" formControlName="description" rows="3" maxlength="4000"></textarea>
+      @if (form.controls.description.touched && form.controls.description.invalid) {
+        <div class="field-errors">
+          @if (form.controls.description.errors?.['maxlength']) {
+            <span>Не длиннее 4000 символов.</span>
+          }
+          @for (message of fieldErrorMessages('description'); track message) {
+            <span class="server">{{ message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="field">
+      <label for="category">Категория *</label>
+      <select id="category" formControlName="categoryId">
+        <option value="">— выберите —</option>
+        @for (cat of categories(); track cat.id) {
+          <option [value]="cat.id">{{ cat.name }}</option>
+        }
+      </select>
+      @if (form.controls.categoryId.touched && form.controls.categoryId.invalid) {
+        <div class="field-errors">
+          @if (form.controls.categoryId.errors?.['required']) {
+            <span>Категория обязательна.</span>
+          }
+          @for (message of fieldErrorMessages('categoryId'); track message) {
+            <span class="server">{{ message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="field">
+      <label for="price">Цена *</label>
+      <input id="price" formControlName="price" [readonly]="editMode()" />
+      @if (!editMode() && form.controls.price.touched && form.controls.price.invalid) {
+        <div class="field-errors">
+          @if (form.controls.price.errors?.['validPrice']) {
+            <span>Число ≥ 0, не более двух знаков после запятой.</span>
+          }
+          @for (message of fieldErrorMessages('price'); track message) {
+            <span class="server">{{ message }}</span>
+          }
+        </div>
+      }
+      @if (editMode()) {
+        <div class="hint">Цена меняется на странице «История цен» (PATCH).</div>
+      }
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn btn-primary" [disabled]="submitting() || form.pristine">
+        {{ submitting() ? 'Сохранение…' : 'Сохранить' }}
+      </button>
+      <a routerLink="/products" class="btn">Отмена</a>
+    </div>
+  </form>
+}

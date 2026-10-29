@@ -1,0 +1,38 @@
+.app-header {
+  background: #202124;
+  padding: 0 20px;
+}
+
+.app-header nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  height: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app-header a {
+  color: #d0d0d0;
+  text-decoration: none;
+  padding: 6px 4px;
+}
+
+.app-header a:hover {
+  color: #fff;
+}
+
+.app-header a.active {
+  color: #8ab4f8;
+}
+
+.app-header .brand {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 18px auto;
+  padding: 0 20px;
+}

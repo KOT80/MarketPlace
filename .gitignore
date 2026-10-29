@@ -1,0 +1,23 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+artifacts/
+TestResults/
+
+# Node / Angular
+node/
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+
+# Environment and secrets
+.env
+appsettings.*.Local.json
+
+# IDE
+.idea/
+.vscode/
