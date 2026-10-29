@@ -1,6 +1,6 @@
 # RetailCatalog
 
-RetailCatalog — тестовое задание для marketplace. 
+RetailCatalog — тестовый проект.
 Проект представляет собой веб-приложение для работы с каталогом товаров и включает frontend и backend части.
 
 ## Технологии
